@@ -18,8 +18,7 @@ const Home = () => {
         console.log(response);
         if (response.data.success) {
           notify("Data fetched successfully...✅");
-          if(response.data.notes.length !==0)
-          {
+          if (response.data.notes.length !== 0) {
             setNote(response.data.notes[0].notes);
           }
         }
@@ -30,7 +29,21 @@ const Home = () => {
       }
     })();
   }, [modal]);
-  console.log(note);
+
+  const clearAllNotes = async () => {
+    try {
+      notify("Clearing all notes...")
+      const response = await instance.delete("/notes");
+      console.log(response);
+      if(response.data.success){
+        notify("All notes cleared ✅")
+        setNote([])
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="home">
       <div className="flex flex-col jcc aic gap-2">
@@ -38,16 +51,34 @@ const Home = () => {
         <button className="write-note pointer" onClick={() => setModal(true)}>
           Create new note
         </button>
+        {note.length !== 0 && (
+          <button className="btn" onClick={clearAllNotes}>
+            Clear All
+          </button>
+        )}
       </div>
+
       {modal && <CreateNote />}
       {loader && "Loading..."}
-      {!loader && <div>{note.length !== 0 ? (
-        <div className="notes-container">
-          {note.slice(0).reverse().map((note) => {
-            return <NoteCard key={note._id} note={note} />;
-          })}
+
+      {!loader && (
+        <div>
+          {note.length !== 0 ? (
+            <>
+              <div className="notes-container">
+                {note
+                  .slice(0)
+                  .reverse()
+                  .map((note) => {
+                    return <NoteCard key={note._id} note={note} />;
+                  })}
+              </div>{" "}
+            </>
+          ) : (
+            "No notes saved yet, try here 👆"
+          )}
         </div>
-      ): "No notes saved yet, try here 👆"}</div>}
+      )}
     </div>
   );
 };
