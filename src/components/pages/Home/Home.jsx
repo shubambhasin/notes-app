@@ -15,11 +15,13 @@ const Home = () => {
       try {
         setLoader(true);
         const response = await instance.get("/notes");
-
         console.log(response);
         if (response.data.success) {
           notify("Data fetched successfully...✅");
-          setNote(response.data.notes[0].notes);
+          if(response.data.notes.length !==0)
+          {
+            setNote(response.data.notes[0].notes);
+          }
         }
         setLoader(false);
       } catch (error) {
@@ -27,21 +29,25 @@ const Home = () => {
         console.log(error);
       }
     })();
-  }, []);
+  }, [modal]);
   console.log(note);
   return (
     <div className="home">
-      Note-Its
-      <button onClick={() => setModal(true)}>Create new note</button>
+      <div className="flex flex-col jcc aic gap-2">
+        <h1 className="h1 x-lg">Note-It</h1>
+        <button className="write-note pointer" onClick={() => setModal(true)}>
+          Create new note
+        </button>
+      </div>
       {modal && <CreateNote />}
       {loader && "Loading..."}
-      {!loader && (
+      {!loader && <div>{note.length !== 0 ? (
         <div className="notes-container">
-          {note.map((note) => {
-            return <NoteCard key={note._id} note={note}/>
+          {note.slice(0).reverse().map((note) => {
+            return <NoteCard key={note._id} note={note} />;
           })}
         </div>
-      )}
+      ): "No notes saved yet, try here 👆"}</div>}
     </div>
   );
 };

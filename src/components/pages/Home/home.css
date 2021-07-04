@@ -1,6 +1,12 @@
 .home {
   position: relative;
   z-index: var(--lvl-2);
+  min-height: calc(100vh - 7rem);
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
 }
 
 .notes-container {
@@ -10,4 +16,12 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+}
+.write-note{
+  background-color: white;
+  border: none;
+  height: 2.5rem;
+  border-radius: 7px;
+  width: 300px;
+  box-shadow: 0px 0px 10px 1px rgb(235, 235, 235);
 }

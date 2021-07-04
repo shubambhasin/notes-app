@@ -7,14 +7,14 @@ import { useAuth } from "../../../context/authContext";
 const Signup = () => {
   const [user, setUser] = useState({ name: "", email: "", password: "" });
 
-  const { login } = useAuth();
+  const { login, setLogin } = useAuth();
   const navigate = useNavigate();
-    console.log(login)
+  console.log(login);
   useEffect(() => {
     if (login) {
       navigate("/");
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChange = (e) => {
@@ -42,6 +42,7 @@ const Signup = () => {
             isUserLoggedIn: true,
           })
         );
+        setLogin(true);
         navigate("/");
       }
 

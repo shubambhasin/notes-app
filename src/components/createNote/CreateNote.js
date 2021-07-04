@@ -79,7 +79,7 @@ const CreateNote = () => {
             </div>
             <div>
               <span className="flex aic gap-1 mt1-rem">
-                <p className="small">Color </p>
+                <p className="small">Vibe: </p>
                 <span className="flex gap-1">
                   <div
                     className="circle-1rem red pointer"

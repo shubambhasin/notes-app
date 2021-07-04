@@ -1,16 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./signin.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { instance } from "../../../api/axiosapi";
+import { notify } from "../../../utils/notification";
+import { useAuth } from "../../../context/authContext";
+
 const Signin = () => {
   const [user, setUser] = useState({ email: "", password: "" });
-
+  const { login, setLogin} = useAuth()
+  const navigate = useNavigate()
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
-  const handleLogin = (e) => {
+
+  useEffect(() => {
+    if(login){
+      navigate('/')
+    }
+  }, [login])
+
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log(user)
+    console.log(user);
+
+    try {
+      notify("Signing in...⏳")
+      const response = await instance.post("/signin", { ...user });
+      console.log(response)
+      if(response.data.success) {
+        notify("Login successful ✅")
+        localStorage.setItem('login', JSON.stringify({
+          isUserLoggedIn: true,
+          token: response.data.token,
+          name: response.data.name
+        }))
+        setLogin(true)
+      }
+    } catch {
+      // notify("Error occured 😥 !")
+    }
   };
 
   return (
