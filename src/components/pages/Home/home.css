@@ -1,0 +1,13 @@
+.home {
+  position: relative;
+  z-index: var(--lvl-2);
+}
+
+.notes-container {
+  margin: 0 auto;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}

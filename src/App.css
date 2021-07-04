@@ -1,38 +1,95 @@
-.App {
-  text-align: center;
+@import url("https://ease-css.netlify.app/ease/css/ease.css");
+
+/* **************************************************************** */
+:root {
+  /* ************light mode******** */
+
+  /* *******background-colors********** */
+  --bg-light-color: #f0f2f5;
+  --bg-white: white;
+  --t-grey-1: rgb(231, 231, 231);
+  --t-grey-2: rgb(177, 177, 177);
+  --t-grey-3: rgb(202, 202, 202);
+  --t-grey-4: rgb(156, 156, 156);
+  --t-grey-5: rgb(121, 121, 121);
+  --t-grey-6: rgb(87, 87, 87);
+  --t-grey-7: rgb(49, 49, 49);
+
+
+  /* *********z-index************ */
+  --lvl-1: 100;
+  --lvl-2: 200;
+  --lvl-3: 300;
+  --lvl-4: 400;
+  --lvl-5: 500;
+  --lvl-6: 600;
+  --lvl-7: 700;
+  --lvl-8: 800;
+  --lvl-9: 900;
+  --lvl-10: 1000;
+  /* *********text-color************* */
+
+  /* ************Dark mode******************* */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body{
+  background-color: rgb(247, 247, 247);
+}
+h1,h2,h3,h4,h5,h6,p{
+  padding: 0;
+  margin: 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+/* ***************************misc************************************* */
+
+.w-100{
+  width: 100%;
+}
+.pl-05rem{
+  padding-left: 0.5rem;
+}
+.circle-1rem{
+  width: 1rem;
+  height: 1rem;
+  border-radius:50%;
+  border: none;
 }
 
-.App-link {
-  color: #61dafb;
+.btn-outline{
+  border: 1px solid black;
 }
+.red
+{
+  background-color: #ff0000;
+  color: black;
+}
+.red::placeholder{
+  color: black;
+}
+.blue
+{
+  background-color: #00aeff;
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+}
+.orange
+{
+  background-color: #ffa702;
+}
+.yellow
+{
+  background-color: #ffd000;
+}
+.green
+{
+  background-color: #00ff00;
+}
+.white{
+  background-color: white;
 }
