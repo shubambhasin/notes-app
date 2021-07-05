@@ -34,7 +34,7 @@ const Home = () => {
         console.log(error);
       }
     })();
-  }, [login]);
+  }, [modal]);
 
   const clearAllNotes = async () => {
     try {
