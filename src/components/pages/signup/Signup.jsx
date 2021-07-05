@@ -4,6 +4,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { notify } from "../../../utils/notification";
 import { instance } from "../../../api/axiosapi";
 import { useAuth } from "../../../context/authContext";
+import logo from "../../../assets/logo.png";
+
 const Signup = () => {
   const [user, setUser] = useState({ name: "", email: "", password: "" });
 
@@ -29,25 +31,34 @@ const Signup = () => {
       const response = await instance.post("/signup", {
         ...user,
       });
-      if (response.data.error) {
-        notify("Error occured 😥");
+      if(response){
+        if (response.data.error) {
+          if(response.data.error.email)
+          {
+            notify(response.data.error.email)
+          }
+          if(response.data.error.password)
+          {
+            notify(response.data.error.password)
+          }
+        }
+        if (response.data.success) {
+          notify("Signed up successfully ✅");
+          localStorage.setItem(
+            "login",
+            JSON.stringify({
+              name: response.data.name,
+              token: response.data.token,
+              isUserLoggedIn: true,
+            })
+          );
+          setLogin(true);
+          setToken(response.data.token);
+          setName(response.data.name);
+          navigate("/");
+        }
+  
       }
-      if (response.data.success) {
-        notify("Signed up successfully ✅");
-        localStorage.setItem(
-          "login",
-          JSON.stringify({
-            name: response.data.name,
-            token: response.data.token,
-            isUserLoggedIn: true,
-          })
-        );
-        setLogin(true);
-        setToken(response.data.token)
-        setName(response.data.name)
-        navigate("/");
-      }
-
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -57,6 +68,10 @@ const Signup = () => {
   return (
     <div>
       <div className="signup-container">
+        <div className="logo-container flex aic jcc">
+          {" "}
+          <img src={logo} className="logo" alt="logo" />
+        </div>
         {/* <div className="signup-banner"></div> */}
         <div className="form-container">
           <form className="flex flex-col gap-1" onSubmit={handleLogin}>

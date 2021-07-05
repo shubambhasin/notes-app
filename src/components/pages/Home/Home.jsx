@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./home.css";
 import CreateNote from "../../createNote/CreateNote";
 import { useToast } from "../../../context/toastContext";
@@ -8,9 +8,10 @@ import NoteCard from "../../noteCard/NoteCard";
 import { useAuth } from "../../../context/authContext";
 import GetColors, { colors } from "../../getColors/GetColors";
 import { useNote } from "../../../context/noteContext";
+import Loader from "../../loader/Loader";
 
 const Home = () => {
-  const [note, setNote] = useState([]);
+  const { note, setNote } = useNote();
   const { searchQuery, setSearchQuery } = useNote();
   const { modal, setModal, loader, setLoader } = useToast();
 
@@ -33,7 +34,7 @@ const Home = () => {
         console.log(error);
       }
     })();
-  }, []);
+  }, [login]);
 
   const clearAllNotes = async () => {
     try {
@@ -66,35 +67,38 @@ const Home = () => {
 
   return (
     <div className="home">
-      <div className="flex flex-col jcc aic gap-2">
-        <h1 className="h1 x-lg">Note-It</h1>
-        <button className="write-note pointer" onClick={() => setModal(true)}>
-          Create new note
-        </button>
-        {note.length !== 0 && (
-          <div className="felx gap-1">
-            <input
-              type="text"
-              placeholder="Search by tag, color, etc"
-              onChange={handleChange}
-            />
-            <button className="btn" onClick={clearAllNotes}>
-              Clear All
-            </button>
-            <div className="mtb05-rem flex gap-1">
-              <small>Sort by Colors</small>
-              {colors.map((color, index) => {
-                return <GetColors key={index} color={color} />;
-              })}
-              <small className="pointer" onClick={() => setSearchQuery("")}>
-                none
-              </small>
+      {!loader && (
+        <div className="flex flex-col jcc aic gap-2">
+          <h1 className="h1 x-lg">Note-It</h1>
+          <button className="write-note pointer" onClick={() => setModal(true)}>
+            Create new note
+          </button>
+          {note.length !== 0 && (
+            <div className="flex flex-col jcc aic gap-1">
+              <input
+                type="text"
+                placeholder="Search by tag, color, etc"
+                onChange={handleChange}
+              />
+
+              <div className="mtb05-rem flex gap-1">
+                <small>Sort by Colors</small>
+                {colors.map((color, index) => {
+                  return <GetColors key={index} color={color} />;
+                })}
+                <small className="pointer" onClick={() => setSearchQuery("")}>
+                  none
+                </small>
+              </div>
+              <button className="btn btn-outline" onClick={clearAllNotes}>
+                Clear All
+              </button>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      )}
       {modal && <CreateNote />}
-      {loader && "Loading..."}
+      {loader && <Loader />}
       {!loader && (
         <div>
           {note.length !== 0 ? (
@@ -104,7 +108,7 @@ const Home = () => {
                   .slice(0)
                   .reverse()
                   .map((note) => {
-                    return <NoteCard key={note._id} note={note} />;
+                    return <NoteCard key={note._id} note_={note} />;
                   })}
               </div>{" "}
             </>

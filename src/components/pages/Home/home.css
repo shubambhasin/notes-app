@@ -1,5 +1,4 @@
 .home {
-  top: 3rem;
   position: relative;
   min-height: calc(100vh - 7rem);
   display: flex;

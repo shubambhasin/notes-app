@@ -42,6 +42,13 @@
   right: 0.5rem;
 }
 
+.add-note-btn:focus {
+  transform: scale(0.95);
+}
+.disabled-btn{
+  background-color:rgb(82, 82, 82);
+  color:white;
+}
 @media screen and (max-width: 400px) {
   .createnote-body {
     width: 300px;

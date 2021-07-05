@@ -9,9 +9,6 @@ export const AuthProvider = ({ children }) => {
     name: null,
     token: null,
   };
-
-  console.log(userinfo);
-
   const [login, setLogin] = useState(userinfo.isUserLoggedIn);
   const [loader, setLoader] = useState(false);
   const [token, setToken] = useState(userinfo.token);

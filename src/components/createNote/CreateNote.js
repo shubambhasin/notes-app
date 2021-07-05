@@ -6,6 +6,7 @@ import { notify } from "../../utils/notification";
 import { instance } from "../../api/axiosapi";
 
 const CreateNote = () => {
+  const [disabled, setDisabled] = useState(false)
   const [note, setNote] = useState({
     title: "",
     content: "",
@@ -30,9 +31,11 @@ const CreateNote = () => {
     } else {
       notify("Adding note...");
       try {
+        setDisabled(true)
         const response = await instance.post("/notes", {
           ...note,
         });
+        setDisabled(false)
         console.log(response);
         if (response.data.success) {
           notify("Saved successfully ✅");
@@ -165,8 +168,9 @@ const CreateNote = () => {
               </div>
             </div>
             <button
+            disabled={disabled}
               onClick={handleNoteSubmit}
-              className="btn btn-md btn-green w-100 mt1-rem"
+              className={`btn btn-md ${!disabled && "btn-green"} w-100 mt1-rem add-note-btn ${ disabled && "disabled-btn"}`}
             >
               Add note
             </button>

@@ -16,7 +16,7 @@ const Navbar = () => {
     <div className="navbar flex jcc  aic">
       <nav className="flex aic jcsb gap-4">
         <NavLink to="/">Home</NavLink>
-        <p>Hi, {name}</p>
+        {name !== null && <p>Hi, {name}</p>}
         {login && (
           <button className="btn btn-md btn-red" onClick={logout}>
             Logout
