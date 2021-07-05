@@ -4,15 +4,15 @@ import "./navbar.css";
 import { useAuth } from "../../context/authContext";
 const Navbar = () => {
   const { login, setLogin } = useAuth();
-  const {name} = useAuth()
+  const { name, setToken, setName } = useAuth();
   const logout = () => {
     localStorage.removeItem("login");
-    setLogin(false)
-
+    setLogin(false);
+    setToken(null);
+    setName(null);
   };
 
   return (
-
     <div className="navbar flex jcc  aic">
       <nav className="flex aic jcsb gap-4">
         <NavLink to="/">Home</NavLink>

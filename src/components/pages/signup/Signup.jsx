@@ -7,7 +7,7 @@ import { useAuth } from "../../../context/authContext";
 const Signup = () => {
   const [user, setUser] = useState({ name: "", email: "", password: "" });
 
-  const { login, setLogin } = useAuth();
+  const { login, setLogin, setToken, setName } = useAuth();
   const navigate = useNavigate();
   console.log(login);
   useEffect(() => {
@@ -43,6 +43,8 @@ const Signup = () => {
           })
         );
         setLogin(true);
+        setToken(response.data.token)
+        setName(response.data.name)
         navigate("/");
       }
 

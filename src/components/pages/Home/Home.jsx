@@ -11,7 +11,6 @@ import { useNote } from "../../../context/noteContext";
 
 const Home = () => {
   const [note, setNote] = useState([]);
-  
   const { searchQuery, setSearchQuery } = useNote();
   const { modal, setModal, loader, setLoader } = useToast();
 
@@ -23,7 +22,7 @@ const Home = () => {
         const response = await instance.get("/notes");
         console.log(response);
         if (response.data.success) {
-          notify("Data fetched successfully...✅");
+          // notify("Data fetched successfully...✅");
           if (response.data.notes.length !== 0) {
             setNote(response.data.notes[0].notes);
           }
@@ -34,9 +33,7 @@ const Home = () => {
         console.log(error);
       }
     })();
-  }, [modal, login]);
-
-  
+  }, []);
 
   const clearAllNotes = async () => {
     try {
@@ -86,8 +83,8 @@ const Home = () => {
             </button>
             <div className="mtb05-rem flex gap-1">
               <small>Sort by Colors</small>
-              {colors.map((color) => {
-                return <GetColors color={color} />;
+              {colors.map((color, index) => {
+                return <GetColors key={index} color={color} />;
               })}
               <small className="pointer" onClick={() => setSearchQuery("")}>
                 none

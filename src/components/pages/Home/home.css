@@ -1,6 +1,6 @@
 .home {
+  top: 3rem;
   position: relative;
-  z-index: var(--lvl-2);
   min-height: calc(100vh - 7rem);
   display: flex;
   flex-direction:column;
