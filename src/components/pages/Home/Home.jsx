@@ -6,11 +6,13 @@ import { instance } from "../../../api/axiosapi";
 import { notify } from "../../../utils/notification";
 import NoteCard from "../../noteCard/NoteCard";
 import { useAuth } from "../../../context/authContext";
+import GetColors, { colors } from "../../getColors/GetColors";
+import { useNote } from "../../../context/noteContext";
 
 const Home = () => {
   const [note, setNote] = useState([]);
-  const [displayNotes, setDisplayNotes] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  
+  const { searchQuery, setSearchQuery } = useNote();
   const { modal, setModal, loader, setLoader } = useToast();
 
   const { login } = useAuth();
@@ -24,7 +26,6 @@ const Home = () => {
           notify("Data fetched successfully...✅");
           if (response.data.notes.length !== 0) {
             setNote(response.data.notes[0].notes);
-            // setDisplayNotes(response.data.notes[0].notes)
           }
         }
         setLoader(false);
@@ -34,6 +35,8 @@ const Home = () => {
       }
     })();
   }, [modal, login]);
+
+  
 
   const clearAllNotes = async () => {
     try {
@@ -48,14 +51,19 @@ const Home = () => {
       console.log(error);
     }
   };
-
   const handleChange = (e) => {
     const inputString = e.target.value;
     setSearchQuery(inputString);
   };
 
   const getFilteredNotes = (note, searchQuery) => {
-    return note.filter((note) => note.note.title.indexOf(searchQuery) !== -1 || note.note.content.indexOf(searchQuery) !== -1);
+    return note.filter(
+      (note) =>
+        note.note.title.indexOf(searchQuery) !== -1 ||
+        note.note.content.indexOf(searchQuery) !== -1 ||
+        note.color.indexOf(searchQuery) !== -1 ||
+        note.tags.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1
+    );
   };
   const filteredNotes = getFilteredNotes(note, searchQuery);
 
@@ -68,32 +76,36 @@ const Home = () => {
         </button>
         {note.length !== 0 && (
           <div className="felx gap-1">
-            <input type="text" placeholder="Search" onChange={handleChange} />
+            <input
+              type="text"
+              placeholder="Search by tag, color, etc"
+              onChange={handleChange}
+            />
             <button className="btn" onClick={clearAllNotes}>
               Clear All
             </button>
+            <div className="mtb05-rem flex gap-1">
+              <small>Sort by Colors</small>
+              {colors.map((color) => {
+                return <GetColors color={color} />;
+              })}
+              <small className="pointer" onClick={() => setSearchQuery("")}>
+                none
+              </small>
+            </div>
           </div>
         )}
-
-        {/* <div className="felx gap-1">
-          <input type="text" placeholder="Search" onChange={handleChange} />
-          <button className="btn" onClick={clearAllNotes}>
-            Clear All
-          </button>
-        </div> */}
       </div>
-
       {modal && <CreateNote />}
       {loader && "Loading..."}
-
       {!loader && (
         <div>
           {note.length !== 0 ? (
             <>
               <div className="notes-container">
                 {filteredNotes
-                  // .slice(0)
-                  // .reverse()
+                  .slice(0)
+                  .reverse()
                   .map((note) => {
                     return <NoteCard key={note._id} note={note} />;
                   })}

@@ -4,6 +4,7 @@ import "./navbar.css";
 import { useAuth } from "../../context/authContext";
 const Navbar = () => {
   const { login, setLogin } = useAuth();
+  const {name} = useAuth()
   const logout = () => {
     localStorage.removeItem("login");
     setLogin(false)
@@ -13,8 +14,9 @@ const Navbar = () => {
   return (
 
     <div className="navbar flex jcc  aic">
-      <nav className="flex aic gap-4">
+      <nav className="flex aic jcsb gap-4">
         <NavLink to="/">Home</NavLink>
+        <p>Hi, {name}</p>
         {login && (
           <button className="btn btn-md btn-red" onClick={logout}>
             Logout

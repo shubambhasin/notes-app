@@ -15,10 +15,11 @@ export const AuthProvider = ({ children }) => {
   const [login, setLogin] = useState(userinfo.isUserLoggedIn);
   const [loader, setLoader] = useState(false);
   const [token, setToken] = useState(userinfo.token);
+  const [name, setName] = useState(userinfo.name);
   return (
     <>
       <AuthContext.Provider
-        value={{ login, setLogin, loader, setLoader, token, setToken }}
+        value={{ login, setLogin, loader, setLoader, token, setToken, name, setName }}
       >
         {children}
       </AuthContext.Provider>

@@ -74,7 +74,12 @@ p {
   border-radius: 50%;
   border: none;
 }
-
+.circle-2rem {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: none;
+}
 .btn-outline {
   border: 1px solid black;
 }
@@ -99,4 +104,7 @@ p {
 }
 .white {
   background-color: white;
+}
+.jcsb{
+  justify-content:space-around;
 }
