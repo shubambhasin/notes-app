@@ -13,9 +13,20 @@
   margin: 0 auto;
   display: flex;
   gap: 1rem;
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  /* display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center; */
+
 }
 .write-note{
   background-color: white;

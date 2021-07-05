@@ -5,11 +5,15 @@ import { useToast } from "../../../context/toastContext";
 import { instance } from "../../../api/axiosapi";
 import { notify } from "../../../utils/notification";
 import NoteCard from "../../noteCard/NoteCard";
+import { useAuth } from "../../../context/authContext";
 
 const Home = () => {
   const [note, setNote] = useState([]);
+  const [displayNotes, setDisplayNotes] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const { modal, setModal, loader, setLoader } = useToast();
 
+  const { login } = useAuth();
   useEffect(() => {
     (async () => {
       try {
@@ -20,6 +24,7 @@ const Home = () => {
           notify("Data fetched successfully...✅");
           if (response.data.notes.length !== 0) {
             setNote(response.data.notes[0].notes);
+            // setDisplayNotes(response.data.notes[0].notes)
           }
         }
         setLoader(false);
@@ -28,21 +33,31 @@ const Home = () => {
         console.log(error);
       }
     })();
-  }, [modal]);
+  }, [modal, login]);
 
   const clearAllNotes = async () => {
     try {
-      notify("Clearing all notes...")
+      notify("Clearing all notes...");
       const response = await instance.delete("/notes");
       console.log(response);
-      if(response.data.success){
-        notify("All notes cleared ✅")
-        setNote([])
+      if (response.data.success) {
+        notify("All notes cleared ✅");
+        setNote([]);
       }
     } catch (error) {
       console.log(error);
     }
   };
+
+  const handleChange = (e) => {
+    const inputString = e.target.value;
+    setSearchQuery(inputString);
+  };
+
+  const getFilteredNotes = (note, searchQuery) => {
+    return note.filter((note) => note.note.title.indexOf(searchQuery) !== -1 || note.note.content.indexOf(searchQuery) !== -1);
+  };
+  const filteredNotes = getFilteredNotes(note, searchQuery);
 
   return (
     <div className="home">
@@ -52,10 +67,20 @@ const Home = () => {
           Create new note
         </button>
         {note.length !== 0 && (
+          <div className="felx gap-1">
+            <input type="text" placeholder="Search" onChange={handleChange} />
+            <button className="btn" onClick={clearAllNotes}>
+              Clear All
+            </button>
+          </div>
+        )}
+
+        {/* <div className="felx gap-1">
+          <input type="text" placeholder="Search" onChange={handleChange} />
           <button className="btn" onClick={clearAllNotes}>
             Clear All
           </button>
-        )}
+        </div> */}
       </div>
 
       {modal && <CreateNote />}
@@ -66,9 +91,9 @@ const Home = () => {
           {note.length !== 0 ? (
             <>
               <div className="notes-container">
-                {note
-                  .slice(0)
-                  .reverse()
+                {filteredNotes
+                  // .slice(0)
+                  // .reverse()
                   .map((note) => {
                     return <NoteCard key={note._id} note={note} />;
                   })}

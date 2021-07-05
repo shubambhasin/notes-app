@@ -15,7 +15,6 @@
   --t-grey-6: rgb(87, 87, 87);
   --t-grey-7: rgb(49, 49, 49);
 
-
   /* *********z-index************ */
   --lvl-1: 100;
   --lvl-2: 200;
@@ -32,64 +31,72 @@
   /* ************Dark mode******************* */
 }
 
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-body{
-  background-color: rgb(247, 247, 247);
+body {
+  background-color: rgb(245, 245, 245);
 }
-h1,h2,h3,h4,h5,h6,p{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   padding: 0;
   margin: 0;
 }
 
-
 /* ***************************misc************************************* */
 
-.w-100{
+.w-100 {
   width: 100%;
 }
-.pl-05rem{
+.pl-05rem {
   padding-left: 0.5rem;
 }
-.circle-1rem{
+.mtb05-rem {
+  margin: 0.5rem 0;
+}
+.mt05-rem {
+  margin-top: 0.5rem;
+}
+.mb05-rem {
+  margin-bottom: 0.5rem;
+}
+.circle-1rem {
   width: 1rem;
   height: 1rem;
-  border-radius:50%;
+  border-radius: 50%;
   border: none;
 }
 
-.btn-outline{
+.btn-outline {
   border: 1px solid black;
 }
-.red
-{
-  background-color: #e40000;
+.red {
+  background-color: #ff323c;
   color: black;
 }
-.red::placeholder{
+.red::placeholder {
   color: black;
 }
-.blue
-{
-  background-color: #00aeff;
-
+.blue {
+  background-color: #00bdd3;
 }
-.orange
-{
+.orange {
   background-color: #ff7402;
 }
-.yellow
-{
-  background-color: #ffd000;
+.yellow {
+  background-color: #ffd416;
 }
-.green
-{
-  background-color: #00dd00;
+.green {
+  background-color: #58b600;
 }
-.white{
+.white {
   background-color: white;
 }

@@ -10,7 +10,7 @@ const CreateNote = () => {
     title: "",
     content: "",
     color: "white",
-    tags: "",
+    tags: "Personal",
   });
 
   const { setModal } = useToast();
