@@ -2,6 +2,8 @@
 
 A fully functional CRUD app. Build using MERN stack
 
+![App look]("https://raw.githubusercontent.com/shubambhasin/notes-app/master/Screenshot%20(280).png")
+
 ## Features
 - Signup/Signin ( passwords are encrypted )
 - login based on jwt
