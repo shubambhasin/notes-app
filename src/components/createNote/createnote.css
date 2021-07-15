@@ -1,43 +1,60 @@
 .createnote-container {
-    z-index: var(--lvl-1);
-    top: 0;
-    left: 0;
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.699);
+  z-index: var(--lvl-1);
+  top: 0;
+  left: 0;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.699);
 }
-.createnote-body{
-    width: 350px;
-    position: absolute;
-    /* background-color: white; */
-    padding: 1rem;border-radius: 10px;
+.createnote-body {
+  width: 350px;
+  position: absolute;
+  /* background-color: white; */
+  padding: 1rem;
+  border-radius: 10px;
 }
-.createnote-body textarea{
-    background: none;
-    border: none;
-    font-size: 1rem;
-    min-height: 8rem;
-    width: 100%;
-    resize: none;
-    font-family: inherit;
-    overflow: hidden;
-    padding: 0.5rem;
-    color: var(--t-grey-7);
-    background-color: white;
-    border-radius:5px;
-    margin-top:0.5rem;
+.createnote-body textarea {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  min-height: 8rem;
+  width: 100%;
+  resize: none;
+  font-family: inherit;
+  overflow: hidden;
+  padding: 0.5rem;
+  color: var(--t-grey-7);
+  background-color: white;
+  border-radius: 5px;
+  margin-top: 0.5rem;
 }
-.relative{
-    postion: relative;
+.relative {
+  postion: relative;
 }
-.close-btn{
-    height:1rem;
-    width: 1rem;
-    position: absolute;
-    right: 0.5rem;
+.close-btn {
+  height: 1rem;
+  width: 1rem;
+  position: absolute;
+  right: 0.5rem;
+}
 
+.add-note-btn:focus {
+  transform: scale(0.95);
+}
+.disabled-btn{
+  background-color:rgb(82, 82, 82);
+  color:white;
+}
+@media screen and (max-width: 400px) {
+  .createnote-body {
+    width: 300px;
+    padding: 0.5rem;
+  }
+  .createnote-body textarea {
+    min-height: 5rem;
+  }
 }
